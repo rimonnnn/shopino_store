@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class PrimaryTextField extends StatelessWidget {
   final String? hintText;
+  final double? width;
   final bool? isPassword;
   final Widget? suffixIcon;
   final TextEditingController? controller;
@@ -16,13 +17,14 @@ class PrimaryTextField extends StatelessWidget {
     this.suffixIcon,
     this.controller,
     this.validator,
+    this.width
   });
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: 350.w,
-      height: 60.h,
+      width: width ?? 350.w,
+
       child: TextFormField(
         controller: controller,
         validator: validator,
@@ -30,7 +32,7 @@ class PrimaryTextField extends StatelessWidget {
         obscureText: isPassword ?? false,
         decoration: InputDecoration(
           fillColor: Colors.white,
-          contentPadding: EdgeInsets.symmetric(vertical: 20, horizontal: 12),
+          contentPadding: EdgeInsets.symmetric(vertical: 15, horizontal: 12),
           hintText: hintText ?? "",
           hintStyle: TextStyle(
             fontFamily: AppFonts.appFonts,
