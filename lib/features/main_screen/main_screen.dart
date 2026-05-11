@@ -1,11 +1,13 @@
+import 'package:ecommerce_app/core/routing/app_routes.dart';
 import 'package:ecommerce_app/core/styling/app_assets.dart';
 import 'package:ecommerce_app/core/styling/app_colors.dart';
-import 'package:ecommerce_app/features/main_screen/account_screen/account_screen.dart';
-import 'package:ecommerce_app/features/main_screen/card_screen/card_screen.dart';
-import 'package:ecommerce_app/features/main_screen/home_screen/home_screen.dart';
+import 'package:ecommerce_app/features/account_screen/account_screen.dart';
+import 'package:ecommerce_app/features/cart_screen/cart_screen.dart';
+import 'package:ecommerce_app/features/home_screen/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:go_router/go_router.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -17,10 +19,11 @@ class MainScreen extends StatefulWidget {
 class _MainScreenState extends State<MainScreen> {
   int currentIndex = 0;
 
-  List<Widget> screens = [HomeScreen(), CardScreen(), AccountScreen()];
+  List<Widget> screens = [HomeScreen(), CartScreen(), AccountScreen()];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       body: screens[currentIndex],
       bottomNavigationBar: BottomNavigationBar(
         iconSize: 24,

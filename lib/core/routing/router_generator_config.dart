@@ -1,7 +1,9 @@
 import 'package:ecommerce_app/core/routing/app_routes.dart';
+import 'package:ecommerce_app/features/address_screen/address_screen.dart';
 import 'package:ecommerce_app/features/auth/log_in/login_screen.dart';
 import 'package:ecommerce_app/features/auth/sign_up/sign_up_screen.dart';
 import 'package:ecommerce_app/features/main_screen/main_screen.dart';
+import 'package:ecommerce_app/features/prodect_details_screen/product_details_screen.dart';
 
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -29,6 +31,20 @@ class RouterGeneratorConfig {
         name: AppRoutes.mainScreen,
         builder: (context, state) {
           return MainScreen();
+        },
+      ),
+      GoRoute(
+        path: AppRoutes.productDetailsScreen,
+        name: AppRoutes.productDetailsScreen,
+        builder: (context, state) {
+          return ProductDetailsScreen();
+        },
+      ),
+      GoRoute(
+        path: AppRoutes.addressScreen,
+        name: AppRoutes.addressScreen,
+        builder: (context, state) {
+          return AddressScreen();
         },
       ),
     ],

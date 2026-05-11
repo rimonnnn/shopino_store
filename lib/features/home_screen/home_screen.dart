@@ -1,13 +1,15 @@
+import 'package:ecommerce_app/core/routing/app_routes.dart';
 import 'package:ecommerce_app/core/styling/app_assets.dart';
 import 'package:ecommerce_app/core/styling/app_colors.dart';
 import 'package:ecommerce_app/core/styling/app_styles.dart';
 import 'package:ecommerce_app/core/widgets/primary_text_field.dart';
 import 'package:ecommerce_app/core/widgets/spacing_widgets.dart';
-import 'package:ecommerce_app/features/main_screen/home_screen/widgets/category_item_widget.dart';
-import 'package:ecommerce_app/features/main_screen/home_screen/widgets/product_items_widget.dart';
+import 'package:ecommerce_app/features/home_screen/widgets/category_item_widget.dart';
+import 'package:ecommerce_app/features/home_screen/widgets/product_items_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:go_router/go_router.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -17,6 +19,7 @@ class HomeScreen extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 24.sp),
       child: SafeArea(
+        
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -60,6 +63,11 @@ class HomeScreen extends StatelessWidget {
               child: ProductItemsWidget(
                 name: 'Fit Polo T Shirt',
                 price: '\$1,690',
+                onTap: () {
+                  GoRouter.of(
+                    context,
+                  ).pushNamed(AppRoutes.productDetailsScreen);
+                },
               ),
             ),
           ],
