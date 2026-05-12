@@ -4,6 +4,7 @@ import 'package:ecommerce_app/core/styling/app_styles.dart';
 import 'package:ecommerce_app/core/widgets/primary_button_widget.dart';
 import 'package:ecommerce_app/core/widgets/primary_text_field.dart';
 import 'package:ecommerce_app/core/widgets/spacing_widgets.dart';
+import 'package:ecommerce_app/features/auth/log_in/widgets/loading_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 

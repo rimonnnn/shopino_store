@@ -12,4 +12,5 @@ class AppAssets {
   static const String faqsIcon = "assets/icons/faqs.svg";
   static const String orderIcon = "assets/icons/order.svg";
   static const String shoes = "assets/images/shoes.png";
+  static const String loading = "assets/lottie/loading.json";
 }

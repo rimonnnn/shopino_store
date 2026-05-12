@@ -1,5 +1,8 @@
 class ApiEndPoints {
-  static const baseUrl = "https://newsapi.org/v2/";
-  static const searchUrl = "everything";
-  static const topHeadLineUrl = "top-headlines";
+  static const String baseUrl = "https://api.escuelajs.co/api/v1";
+  static const String products = "/products";
+  static const String categories = "/categories";
+  static const String users = "/users";
+  static const String login = "/auth/login";
+  static const String profile = "/auth/profile";
 }
