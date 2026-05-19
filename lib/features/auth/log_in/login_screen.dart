@@ -1,10 +1,17 @@
+import 'dart:developer';
+
+import 'package:animated_snack_bar/animated_snack_bar.dart';
+import 'package:dartz/dartz.dart' as either;
 import 'package:ecommerce_app/core/routing/app_routes.dart';
 import 'package:ecommerce_app/core/styling/app_colors.dart';
 import 'package:ecommerce_app/core/styling/app_styles.dart';
+import 'package:ecommerce_app/core/utils/animated_snack_dialog.dart';
 import 'package:ecommerce_app/core/widgets/primary_button_widget.dart';
 import 'package:ecommerce_app/core/widgets/primary_text_field.dart';
 import 'package:ecommerce_app/core/widgets/spacing_widgets.dart';
 import 'package:ecommerce_app/features/auth/log_in/widgets/loading_widget.dart';
+import 'package:ecommerce_app/features/auth/model/login_response_model.dart';
+import 'package:ecommerce_app/features/auth/repo/auth_repo.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -22,10 +29,34 @@ class _LoginScreenState extends State<LoginScreen> {
   bool isPasswordHidden = true;
 
   @override
+  @override
   void initState() {
     super.initState();
+
     emailController = TextEditingController();
     passwordController = TextEditingController();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      AuthRepo().login("john@mail.com", "changeme").then((
+        either.Either<String, LoginResponseModel> res,
+      ) {
+        if (!mounted) return;
+
+        res.fold(
+          (error) {
+            showAnimatedSnackDialog(
+              context,
+              message: error,
+              type: AnimatedSnackBarType.error,
+            );
+            log(error);
+          },
+          (right) {
+            log(right.toJson().toString());
+          },
+        );
+      });
+    });
   }
 
   @override
