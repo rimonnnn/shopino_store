@@ -1,7 +1,7 @@
 import 'package:animated_snack_bar/animated_snack_bar.dart';
 import 'package:flutter/material.dart';
 
-showAnimatedSnackDialog(
+void showAnimatedSnackDialog(
   BuildContext context, {
 
   required String? message,
