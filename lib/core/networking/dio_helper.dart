@@ -18,7 +18,7 @@ class DioHelper {
     dio!.interceptors.add(PrettyDioLogger());
   }
 
-  getRequest({required endPoint, required Map<String, dynamic> query}) async {
+  getRequest({required endPoint,  Map<String, dynamic>? query }) async {
     try {
       Response response = await dio!.get(endPoint, queryParameters: query);
       return response;
