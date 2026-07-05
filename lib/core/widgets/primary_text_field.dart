@@ -10,6 +10,7 @@ class PrimaryTextField extends StatelessWidget {
   final Widget? suffixIcon;
   final TextEditingController? controller;
   final String? Function(String?)? validator;
+  final void Function(String)? onChanged;
   const PrimaryTextField({
     super.key,
     this.hintText,
@@ -17,7 +18,8 @@ class PrimaryTextField extends StatelessWidget {
     this.suffixIcon,
     this.controller,
     this.validator,
-    this.width
+    this.width,
+    this.onChanged,
   });
 
   @override
@@ -28,6 +30,7 @@ class PrimaryTextField extends StatelessWidget {
       child: TextFormField(
         controller: controller,
         validator: validator,
+        onChanged: onChanged,
         cursorColor: AppColors.primaryColor,
         obscureText: isPassword ?? false,
         decoration: InputDecoration(

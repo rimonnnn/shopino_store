@@ -4,6 +4,7 @@ import 'package:ecommerce_app/features/address_screen/address_screen.dart';
 import 'package:ecommerce_app/features/auth/cubit/auth_cubit.dart';
 import 'package:ecommerce_app/features/auth/log_in/login_screen.dart';
 import 'package:ecommerce_app/features/auth/sign_up/sign_up_screen.dart';
+import 'package:ecommerce_app/features/home_screen/models/product_model.dart';
 import 'package:ecommerce_app/features/main_screen/main_screen.dart';
 import 'package:ecommerce_app/features/prodect_details_screen/product_details_screen.dart';
 
@@ -43,7 +44,8 @@ class RouterGeneratorConfig {
         path: AppRoutes.productDetailsScreen,
         name: AppRoutes.productDetailsScreen,
         builder: (context, state) {
-          return ProductDetailsScreen();
+          ProductsModel product = state.extra as ProductsModel;
+          return ProductDetailsScreen(product: product);
         },
       ),
       GoRoute(

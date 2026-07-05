@@ -32,7 +32,7 @@ class ProductItemsWidget extends StatelessWidget {
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(10.r),
                 child: CachedNetworkImage(
-                  imageUrl: image ?? "",
+                  imageUrl: image ?? AppAssets.shopping,
                   width: double.infinity,
                   fit: BoxFit.cover,
                   placeholder: (context, url) => const Center(
