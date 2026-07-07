@@ -6,8 +6,8 @@ import 'package:ecommerce_app/features/cart_screen/models/cart_item_model.dart';
 class CartCubit extends Cubit<CartState> {
   CartCubit() : super(CartInitial());
 
-  static const double vatRate = 0.0; // غيّرها لو هتفعّل ضريبة فعليًا
-  static const double shippingFee = 80;
+  static const double vatRate = 0.5; // غيّرها لو هتفعّل ضريبة فعليًا
+  static const double shippingFee = 20;
 
   final List<CartItemModel> _items = [];
 
@@ -57,16 +57,21 @@ class CartCubit extends Cubit<CartState> {
   }
 
   void _emitLoaded() {
-    final subtotal = _items.fold<double>(0, (sum, item) => sum + item.totalPrice);
+    final subtotal = _items.fold<double>(
+      0,
+      (sum, item) => sum + item.totalPrice,
+    );
     final vat = subtotal * vatRate;
     final total = subtotal + vat + (_items.isEmpty ? 0 : shippingFee);
 
-    emit(CartLoaded(
-      items: List.unmodifiable(_items),
-      subtotal: subtotal,
-      vat: vat,
-      shippingFee: _items.isEmpty ? 0 : shippingFee,
-      total: total,
-    ));
+    emit(
+      CartLoaded(
+        items: List.unmodifiable(_items),
+        subtotal: subtotal,
+        vat: vat,
+        shippingFee: _items.isEmpty ? 0 : shippingFee,
+        total: total,
+      ),
+    );
   }
 }
