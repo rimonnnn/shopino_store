@@ -10,7 +10,6 @@ import 'package:ecommerce_app/features/home_screen/models/product_model.dart';
 import 'package:ecommerce_app/features/main_screen/main_screen.dart';
 import 'package:ecommerce_app/features/prodect_details_screen/product_details_screen.dart';
 
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 

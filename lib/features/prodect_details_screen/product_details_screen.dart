@@ -43,6 +43,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
 
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
+        backgroundColor: Colors.green,
         content: Text("Added ${_quantity}x ${product.title} to cart"),
         behavior: SnackBarBehavior.floating,
       ),
