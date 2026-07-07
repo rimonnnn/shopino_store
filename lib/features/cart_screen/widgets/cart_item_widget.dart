@@ -10,13 +10,25 @@ class CartItemWidget extends StatelessWidget {
   final String? fitText;
   final String? price;
   final String? imagePath;
+  final int quantity;
+  final VoidCallback? onIncrease;
+  final VoidCallback? onDecrease;
+  final VoidCallback? onRemove;
 
   const CartItemWidget({
     super.key,
     required this.fitText,
     required this.price,
     required this.imagePath,
+    this.quantity = 1,
+    this.onIncrease,
+    this.onDecrease,
+    this.onRemove,
   });
+
+  bool get _isNetworkImage =>
+      imagePath != null &&
+      (imagePath!.startsWith('http://') || imagePath!.startsWith('https://'));
 
   @override
   Widget build(BuildContext context) {
@@ -32,8 +44,30 @@ class CartItemWidget extends StatelessWidget {
           SizedBox(
             width: 80.w,
             height: 85.h,
-
-            child: Image.asset(imagePath ?? "", fit: BoxFit.cover),
+            child: _isNetworkImage
+                ? Image.network(
+                    imagePath!,
+                    fit: BoxFit.cover,
+                    errorBuilder: (context, error, stackTrace) {
+                      return Image.asset(AppAssets.shopping, fit: BoxFit.cover);
+                    },
+                    loadingBuilder: (context, child, loadingProgress) {
+                      if (loadingProgress == null) return child;
+                      return const Center(
+                        child: SizedBox(
+                          width: 20,
+                          height: 20,
+                          child: CircularProgressIndicator(strokeWidth: 2),
+                        ),
+                      );
+                    },
+                  )
+                : Image.asset(
+                    imagePath?.isNotEmpty == true
+                        ? imagePath!
+                        : AppAssets.shopping,
+                    fit: BoxFit.cover,
+                  ),
           ),
           WidthSpace(16),
           Expanded(
@@ -43,53 +77,70 @@ class CartItemWidget extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(fitText ?? "", style: AppStyles.black16SemiBold),
-                    Icon(Icons.delete, color: Colors.redAccent),
+                    Expanded(
+                      child: Text(
+                        fitText ?? "",
+                        style: AppStyles.black16SemiBold,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ),
+                    InkWell(
+                      onTap: onRemove,
+                      child: const Icon(Icons.delete, color: Colors.redAccent),
+                    ),
                   ],
                 ),
                 HeightSpace(36),
-                Row(
-                  children: [
-                    Text(price ?? "", style: AppStyles.black16SemiBold),
-                    WidthSpace(90),
-                    Row(
-                      children: [
-                        Container(
-                          padding: EdgeInsets.symmetric(
-                            horizontal: 8.sp,
-                            vertical: 12.sp,
-                          ),
-
-                          decoration: BoxDecoration(
-                            border: Border.all(
-                              color: AppColors.secondaryColor,
-                              width: 0.5.sp,
+                SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Row(
+                    children: [
+                      Text(price ?? "", style: AppStyles.black16SemiBold),
+                      WidthSpace(90),
+                      Row(
+                        children: [
+                          InkWell(
+                            onTap: onDecrease,
+                            child: Container(
+                              padding: EdgeInsets.symmetric(
+                                horizontal: 8.sp,
+                                vertical: 12.sp,
+                              ),
+                              decoration: BoxDecoration(
+                                border: Border.all(
+                                  color: AppColors.secondaryColor,
+                                  width: 0.5.sp,
+                                ),
+                                borderRadius: BorderRadius.circular(3),
+                              ),
+                              child: SvgPicture.asset(AppAssets.minusIcon),
                             ),
-                            borderRadius: BorderRadius.circular(3),
                           ),
-                          child: SvgPicture.asset(AppAssets.minusIcon),
-                        ),
-                        WidthSpace(10),
-                        Text("1"),
-                        WidthSpace(10),
-                        Container(
-                          padding: EdgeInsets.symmetric(
-                            horizontal: 9.sp,
-                            vertical: 6.sp,
-                          ),
-
-                          decoration: BoxDecoration(
-                            border: Border.all(
-                              color: AppColors.secondaryColor,
-                              width: 0.5.sp,
+                          WidthSpace(10),
+                          Text(quantity.toString()),
+                          WidthSpace(10),
+                          InkWell(
+                            onTap: onIncrease,
+                            child: Container(
+                              padding: EdgeInsets.symmetric(
+                                horizontal: 9.sp,
+                                vertical: 6.sp,
+                              ),
+                              decoration: BoxDecoration(
+                                border: Border.all(
+                                  color: AppColors.secondaryColor,
+                                  width: 0.5.sp,
+                                ),
+                                borderRadius: BorderRadius.circular(3),
+                              ),
+                              child: SvgPicture.asset(AppAssets.plusIcon),
                             ),
-                            borderRadius: BorderRadius.circular(3),
                           ),
-                          child: SvgPicture.asset(AppAssets.plusIcon),
-                        ),
-                      ],
-                    ),
-                  ],
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
               ],
             ),

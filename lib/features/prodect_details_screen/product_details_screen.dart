@@ -1,10 +1,13 @@
 import 'package:ecommerce_app/core/styling/app_assets.dart';
+import 'package:ecommerce_app/features/cart_screen/cubit/cart_cubit.dart';
+import 'package:ecommerce_app/features/cart_screen/models/cart_item_model.dart';
 import 'package:ecommerce_app/features/home_screen/models/product_model.dart';
 import 'package:ecommerce_app/features/prodect_details_screen/widgets/product_bottom_bar.dart';
 import 'package:ecommerce_app/features/prodect_details_screen/widgets/product_image_gallery.dart';
 import 'package:ecommerce_app/features/prodect_details_screen/widgets/product_info_section.dart';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ProductDetailsScreen extends StatefulWidget {
   final ProductsModel product;
@@ -26,6 +29,18 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
   }
 
   void _addToCart() {
+    context.read<CartCubit>().addItem(
+      CartItemModel(
+        id: product.id.toString(),
+        fitText: product.title,
+        price: product.price.toDouble(),
+        imagePath: product.images.isNotEmpty
+            ? product.images.first
+            : AppAssets.shopping,
+        quantity: _quantity,
+      ),
+    );
+
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text("Added ${_quantity}x ${product.title} to cart"),
