@@ -15,6 +15,7 @@ import 'package:ecommerce_app/features/home_screen/widgets/product_items_widget.
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 
@@ -184,33 +185,45 @@ class _HomeScreenState extends State<HomeScreen> {
                         );
                       }
 
-                      return GridView.builder(
-                        shrinkWrap: true,
-                        physics: const NeverScrollableScrollPhysics(),
-                        gridDelegate:
-                            const SliverGridDelegateWithFixedCrossAxisCount(
-                              crossAxisCount: 2,
-                              mainAxisSpacing: 8,
-                              crossAxisSpacing: 16,
-                              childAspectRatio: 0.8,
-                            ),
-                        itemCount: products.length,
-                        itemBuilder: (context, index) {
-                          final product = products[index];
-                          return ProductItemsWidget(
-                            name: product.title,
-                            price: product.price.toString(),
-                            image: product.images.isNotEmpty
-                                ? product.images.first
-                                : AppAssets.shopping,
-                            onTap: () {
-                              GoRouter.of(context).pushNamed(
-                                AppRoutes.productDetailsScreen,
-                                extra: product,
-                              );
-                            },
-                          );
-                        },
+                      return AnimationLimiter(
+                        child: GridView.builder(
+                          shrinkWrap: true,
+                          physics: const NeverScrollableScrollPhysics(),
+                          gridDelegate:
+                              const SliverGridDelegateWithFixedCrossAxisCount(
+                                crossAxisCount: 2,
+                                mainAxisSpacing: 8,
+                                crossAxisSpacing: 16,
+                                childAspectRatio: 0.8,
+                              ),
+                          itemCount: products.length,
+                          itemBuilder: (context, index) {
+                            final product = products[index];
+                            return AnimationConfiguration.staggeredGrid(
+                              position: index,
+                              duration: const Duration(milliseconds: 600),
+                              columnCount: 2,
+                              child: ScaleAnimation(
+                                scale: 0.5,
+                                child: FadeInAnimation(
+                                  child: ProductItemsWidget(
+                                    name: product.title,
+                                    price: product.price.toString(),
+                                    image: product.images.isNotEmpty
+                                        ? product.images.first
+                                        : AppAssets.shopping,
+                                    onTap: () {
+                                      GoRouter.of(context).pushNamed(
+                                        AppRoutes.productDetailsScreen,
+                                        extra: product,
+                                      );
+                                    },
+                                  ),
+                                ),
+                              ),
+                            );
+                          },
+                        ),
                       );
                     }
 

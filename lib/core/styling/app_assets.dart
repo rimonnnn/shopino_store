@@ -14,4 +14,6 @@ class AppAssets {
   static const String shoes = "assets/images/shoes.png";
   static const String loading = "assets/lottie/loading.json";
   static const String shopping = "assets/images/shopping.webp";
+  static const String logo1 = "assets/icons/logo_2.svg";
+  static const String logo2 = "assets/icons/logo_3.svg";
 }
