@@ -1,4 +1,3 @@
-// lib/features/cart_screen/models/cart_item_model.dart
 class CartItemModel {
   final String id;
   final String fitText;
