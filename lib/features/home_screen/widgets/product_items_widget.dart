@@ -31,18 +31,21 @@ class ProductItemsWidget extends StatelessWidget {
             Expanded(
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(10.r),
-                child: CachedNetworkImage(
-                  imageUrl: image ?? AppAssets.shopping,
-                  width: double.infinity,
-                  fit: BoxFit.cover,
-                  placeholder: (context, url) => const Center(
-                    child: CircularProgressIndicator(strokeWidth: 2),
-                  ),
-                  errorWidget: (context, url, error) => Container(
-                    color: Colors.grey[200],
-                    child: const Icon(
-                      Icons.image_not_supported_outlined,
-                      color: Colors.grey,
+                child: Hero(
+                  tag: "product$name",
+                  child: CachedNetworkImage(
+                    imageUrl: image ?? AppAssets.shopping,
+                    width: double.infinity,
+                    fit: BoxFit.cover,
+                    placeholder: (context, url) => const Center(
+                      child: CircularProgressIndicator(strokeWidth: 2),
+                    ),
+                    errorWidget: (context, url, error) => Container(
+                      color: Colors.grey[200],
+                      child: const Icon(
+                        Icons.image_not_supported_outlined,
+                        color: Colors.grey,
+                      ),
                     ),
                   ),
                 ),

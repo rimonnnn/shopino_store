@@ -1,17 +1,21 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:ecommerce_app/core/styling/app_assets.dart';
 import 'package:ecommerce_app/core/styling/app_colors.dart';
 import 'package:ecommerce_app/core/widgets/circle_icon_button.dart';
+import 'package:ecommerce_app/features/home_screen/models/product_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ProductImageGallery extends StatefulWidget {
   final List<String> images;
   final VoidCallback onBackTap;
+  final ProductsModel product;
 
   const ProductImageGallery({
     super.key,
     required this.images,
     required this.onBackTap,
+    required this.product,
   });
 
   @override
@@ -46,17 +50,16 @@ class _ProductImageGalleryState extends State<ProductImageGallery> {
                   bottomLeft: Radius.circular(24.r),
                   bottomRight: Radius.circular(24.r),
                 ),
-                child: Image.network(
-                  widget.images[index],
-                  fit: BoxFit.cover,
-                  errorBuilder: (context, error, stackTrace) => Image.asset(
-                    AppAssets.poloTshert,
+                child: Hero(
+                 tag: "product${widget.product.title}",
+                  child: CachedNetworkImage(
+                    imageUrl: widget.images[index],
                     fit: BoxFit.cover,
+                    errorWidget: (context, url, error) =>
+                        Image.asset(AppAssets.poloTshert, fit: BoxFit.cover),
+                    placeholder: (context, url) =>
+                        const Center(child: CircularProgressIndicator()),
                   ),
-                  loadingBuilder: (context, child, progress) {
-                    if (progress == null) return child;
-                    return const Center(child: CircularProgressIndicator());
-                  },
                 ),
               );
             },

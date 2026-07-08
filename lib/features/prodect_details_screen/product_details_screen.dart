@@ -67,6 +67,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                 ProductImageGallery(
                   images: images,
                   onBackTap: () => Navigator.pop(context),
+                  product: product,
                 ),
                 ProductInfoSection(product: product),
               ],
