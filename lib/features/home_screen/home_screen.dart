@@ -74,7 +74,13 @@ class _HomeScreenState extends State<HomeScreen> {
                   style: AppStyles.grey16W400.copyWith(fontSize: 14.sp),
                 ),
                 HeightSpace(4),
-                Text("Discover", style: AppStyles.black32SemiBold),
+                Text(
+                  "Shopino Store",
+                  style: AppStyles.primaryHeadLineSyle.copyWith(
+                    fontSize: 24.sp,
+                    color: AppColors.primaryColor,
+                  ),
+                ),
                 HeightSpace(16),
                 Row(
                   children: [

@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
       builder: (context, child) {
         return MaterialApp.router(
           routerConfig: RouterGeneratorConfig.goRouter,
-          title: 'News App',
+          title: 'Shopino',
           debugShowCheckedModeBanner: false,
         );
       },
