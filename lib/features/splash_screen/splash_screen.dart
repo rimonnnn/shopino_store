@@ -34,7 +34,7 @@ class _SplashScreenState extends State<SplashScreen>
   }
 
   void waitAnimationAndNavigate() async {
-    await Future.delayed(const Duration(seconds: 4), () {
+    await Future.delayed(const Duration(seconds: 3), () {
       sl<StorageHelper>().getAccessToken().then((value) {
         if (value != null && value.isNotEmpty) {
           context.pushReplacementNamed(AppRoutes.mainScreen);

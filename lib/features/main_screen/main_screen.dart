@@ -41,6 +41,12 @@ class _MainScreenState extends State<MainScreen> {
         type: BottomNavigationBarType.fixed,
         showSelectedLabels: true,
         showUnselectedLabels: false,
+        selectedLabelStyle: TextStyle(
+          color: AppColors.primaryColor,
+          fontSize: 12,
+          fontWeight: FontWeight.w600,
+        ),
+        unselectedLabelStyle: TextStyle(color: Colors.grey, fontSize: 12),
         elevation: 2,
         currentIndex: currentIndex,
         onTap: (value) {
@@ -50,25 +56,35 @@ class _MainScreenState extends State<MainScreen> {
         },
         items: [
           BottomNavigationBarItem(
+            backgroundColor: Colors.white,
             icon: SvgPicture.asset(
               AppAssets.homeIcon,
-              color: currentIndex == 0 ? AppColors.primaryColor : Colors.grey,
+              colorFilter: ColorFilter.mode(
+                currentIndex == 0 ? AppColors.primaryColor : Colors.grey,
+                BlendMode.srcIn,
+              ),
             ),
             label: "Home",
           ),
           BottomNavigationBarItem(
+            backgroundColor: Colors.white,
             icon: SvgPicture.asset(
               AppAssets.cardIcon,
-              color: currentIndex == 1 ? AppColors.primaryColor : Colors.grey,
+              colorFilter: ColorFilter.mode(
+                currentIndex == 1 ? AppColors.primaryColor : Colors.grey,
+                BlendMode.srcIn,
+              ),
             ),
-
             label: "Cart",
           ),
-
           BottomNavigationBarItem(
+            backgroundColor: Colors.white,
             icon: SvgPicture.asset(
               AppAssets.accountIcon,
-              color: currentIndex == 2 ? AppColors.primaryColor : Colors.grey,
+              colorFilter: ColorFilter.mode(
+                currentIndex == 2 ? AppColors.primaryColor : Colors.grey,
+                BlendMode.srcIn,
+              ),
             ),
             label: "Account",
           ),
