@@ -1,4 +1,3 @@
-import 'package:ecommerce_app/core/routing/app_routes.dart';
 import 'package:ecommerce_app/core/styling/app_assets.dart';
 import 'package:ecommerce_app/core/styling/app_colors.dart';
 import 'package:ecommerce_app/core/utils/service_locator.dart';

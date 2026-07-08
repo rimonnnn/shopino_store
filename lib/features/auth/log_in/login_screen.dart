@@ -1,7 +1,5 @@
-import 'dart:developer';
 
 import 'package:animated_snack_bar/animated_snack_bar.dart';
-import 'package:dartz/dartz.dart' as either;
 import 'package:ecommerce_app/core/routing/app_routes.dart';
 import 'package:ecommerce_app/core/styling/app_colors.dart';
 import 'package:ecommerce_app/core/styling/app_styles.dart';
@@ -14,8 +12,6 @@ import 'package:ecommerce_app/core/widgets/spacing_widgets.dart';
 import 'package:ecommerce_app/features/auth/cubit/auth_cubit.dart';
 import 'package:ecommerce_app/features/auth/cubit/auth_state.dart';
 import 'package:ecommerce_app/features/auth/log_in/widgets/loading_widget.dart';
-import 'package:ecommerce_app/features/auth/model/login_response_model.dart';
-import 'package:ecommerce_app/features/auth/repo/auth_repo.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
