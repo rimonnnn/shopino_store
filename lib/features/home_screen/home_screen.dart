@@ -73,43 +73,32 @@ class _HomeScreenState extends State<HomeScreen> {
                   _greeting,
                   style: AppStyles.grey16W400.copyWith(fontSize: 14.sp),
                 ),
-                HeightSpace(4),
-                Text(
-                  "Shopino Store",
-                  style: AppStyles.primaryHeadLineSyle.copyWith(
-                    fontSize: 24.sp,
-                    color: AppColors.primaryColor,
-                  ),
-                ),
-                HeightSpace(16),
+                HeightSpace(8),
                 Row(
                   children: [
-                    PrimaryTextField(
-                      width: MediaQuery.of(context).size.width * 0.7,
-                      hintText: "Search for clothes...",
-                      controller: _searchController,
-                      onChanged: (value) {
-                        setState(() => _searchQuery = value.trim());
-                      },
+                    SvgPicture.asset(
+                      AppAssets.logo2,
+                      width: 40.w,
+                      height: 40.h,
                     ),
                     WidthSpace(8),
-                    Container(
-                      padding: EdgeInsets.all(16.sp),
-                      width: 60.w,
-                      height: 60.h,
-                      decoration: BoxDecoration(
+                    Text(
+                      "Shopino",
+                      style: AppStyles.primaryHeadLineSyle.copyWith(
+                        fontSize: 24.sp,
                         color: AppColors.primaryColor,
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      child: SvgPicture.asset(
-                        AppAssets.filterIcon,
-                        colorFilter: const ColorFilter.mode(
-                          Colors.white,
-                          BlendMode.srcIn,
-                        ),
                       ),
                     ),
                   ],
+                ),
+                HeightSpace(16),
+                PrimaryTextField(
+                  width: MediaQuery.of(context).size.width * 0.8,
+                  hintText: "Search for products...",
+                  controller: _searchController,
+                  onChanged: (value) {
+                    setState(() => _searchQuery = value.trim());
+                  },
                 ),
                 HeightSpace(16),
                 BlocBuilder<CategoriesCubit, CategoriesState>(
