@@ -1,11 +1,8 @@
-
 import 'package:animated_snack_bar/animated_snack_bar.dart';
 import 'package:ecommerce_app/core/routing/app_routes.dart';
 import 'package:ecommerce_app/core/styling/app_colors.dart';
 import 'package:ecommerce_app/core/styling/app_styles.dart';
 import 'package:ecommerce_app/core/utils/animated_snack_dialog.dart';
-import 'package:ecommerce_app/core/utils/service_locator.dart';
-import 'package:ecommerce_app/core/utils/storage_helper.dart';
 import 'package:ecommerce_app/core/widgets/primary_button_widget.dart';
 import 'package:ecommerce_app/core/widgets/primary_text_field.dart';
 import 'package:ecommerce_app/core/widgets/spacing_widgets.dart';
@@ -30,24 +27,21 @@ class _LoginScreenState extends State<LoginScreen> {
   bool isPasswordHidden = true;
 
   @override
-  @override
   void initState() {
     super.initState();
-
     emailController = TextEditingController();
     passwordController = TextEditingController();
+    // Session/token check has moved to GoRouter's redirect — see AppRouter.
+    // Doing it here caused duplicate navigation (two async calls each
+    // pushing mainScreen), which was the root cause of the
+    // "Duplicate GlobalKey" crash.
+  }
 
-    sl<StorageHelper>().getAccessToken().then((value) {
-      if (value != null && value.isNotEmpty) {
-        context.pushReplacementNamed(AppRoutes.mainScreen);
-      }
-    });
-
-    sl<StorageHelper>().getRefreshToken().then((value) {
-      if (value != null && value.isNotEmpty) {
-        context.pushReplacementNamed(AppRoutes.mainScreen);
-      }
-    });
+  @override
+  void dispose() {
+    emailController.dispose();
+    passwordController.dispose();
+    super.dispose();
   }
 
   @override
@@ -72,7 +66,10 @@ class _LoginScreenState extends State<LoginScreen> {
 
               if (!context.mounted) return;
 
-              GoRouter.of(context).pushNamed(AppRoutes.mainScreen);
+              // pushReplacement instead of push: even if this listener were
+              // ever triggered more than once, the first call replaces the
+              // route instead of stacking a duplicate on top of it.
+              GoRouter.of(context).pushReplacementNamed(AppRoutes.mainScreen);
             }
           },
           builder: (context, state) {
@@ -124,7 +121,6 @@ class _LoginScreenState extends State<LoginScreen> {
                       HeightSpace(4),
                       PrimaryTextField(
                         isPassword: isPasswordHidden,
-
                         controller: passwordController,
                         validator: (value) {
                           if (value == null || value.isEmpty) {
@@ -157,14 +153,21 @@ class _LoginScreenState extends State<LoginScreen> {
                         alignment: Alignment.center,
                         child: PrimaryButtonWidget(
                           buttonText: "Sign in",
-                          onPress: () {
-                            if (!formKey.currentState!.validate()) return;
+                          // Disabled while a login request is in flight, to
+                          // prevent double-tap from firing login() twice and
+                          // triggering the listener's navigation twice.
+                          onPress: state is LoadingAuthState
+                              ? null
+                              : () {
+                                  if (!formKey.currentState!.validate()) {
+                                    return;
+                                  }
 
-                            context.read<AuthCubit>().login(
-                              email: emailController.text.trim(),
-                              password: passwordController.text.trim(),
-                            );
-                          },
+                                  context.read<AuthCubit>().login(
+                                    email: emailController.text.trim(),
+                                    password: passwordController.text.trim(),
+                                  );
+                                },
                         ),
                       ),
                       HeightSpace(340),
@@ -180,7 +183,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             onTap: () {
                               GoRouter.of(
                                 context,
-                              ).pushNamed(AppRoutes.signUpScreen);
+                              ).goNamed(AppRoutes.signUpScreen);
                             },
                             child: Text(
                               "Join",

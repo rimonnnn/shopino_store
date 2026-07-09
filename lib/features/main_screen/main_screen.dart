@@ -2,6 +2,7 @@ import 'package:ecommerce_app/core/styling/app_assets.dart';
 import 'package:ecommerce_app/core/styling/app_colors.dart';
 import 'package:ecommerce_app/core/utils/service_locator.dart';
 import 'package:ecommerce_app/features/account_screen/account_screen.dart';
+import 'package:ecommerce_app/features/auth/cubit/auth_cubit.dart';
 import 'package:ecommerce_app/features/cart_screen/cart_screen.dart';
 import 'package:ecommerce_app/features/home_screen/cubit/categories_cubit.dart';
 import 'package:ecommerce_app/features/home_screen/cubit/products_cubit.dart';
@@ -29,7 +30,7 @@ class _MainScreenState extends State<MainScreen> {
       child: HomeScreen(),
     ),
     CartScreen(),
-    AccountScreen(),
+    BlocProvider(create: (context) => sl<AuthCubit>(), child: AccountScreen()),
   ];
   @override
   Widget build(BuildContext context) {

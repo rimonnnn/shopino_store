@@ -1,5 +1,6 @@
 import 'package:ecommerce_app/core/routing/app_routes.dart';
 import 'package:ecommerce_app/core/utils/service_locator.dart';
+import 'package:ecommerce_app/core/utils/storage_helper.dart';
 import 'package:ecommerce_app/features/address_screen/address_screen.dart';
 import 'package:ecommerce_app/features/auth/cubit/auth_cubit.dart';
 import 'package:ecommerce_app/features/auth/log_in/login_screen.dart';
@@ -10,20 +11,54 @@ import 'package:ecommerce_app/features/home_screen/models/product_model.dart';
 import 'package:ecommerce_app/features/main_screen/main_screen.dart';
 import 'package:ecommerce_app/features/prodect_details_screen/product_details_screen.dart';
 import 'package:ecommerce_app/features/splash_screen/splash_screen.dart';
-
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
+import 'package:flutter/material.dart';
+
 class RouterGeneratorConfig {
+  static final GlobalKey<NavigatorState> rootNavigatorKey =
+      GlobalKey<NavigatorState>();
+
   static GoRouter goRouter = GoRouter(
+    navigatorKey: rootNavigatorKey,
     initialLocation: AppRoutes.splashScreen,
+    errorBuilder: (context, state) => const NotFoundScreen(),
+
+    // Centralized session check. This replaces the token check that used to
+    // live inside LoginScreen.initState (two separate async calls that could
+    // both fire pushReplacementNamed(mainScreen) at once — the root cause of
+    // the earlier "Duplicate GlobalKey" crash).
+    redirect: (context, state) async {
+      // Let splash screen handle its own startup logic without interference.
+      if (state.matchedLocation == AppRoutes.splashScreen) return null;
+
+      final accessToken = await sl<StorageHelper>().getAccessToken();
+      final refreshToken = await sl<StorageHelper>().getRefreshToken();
+      final isLoggedIn =
+          (accessToken != null && accessToken.isNotEmpty) ||
+          (refreshToken != null && refreshToken.isNotEmpty);
+
+      final isAuthRoute =
+          state.matchedLocation == AppRoutes.loginScreen ||
+          state.matchedLocation == AppRoutes.signUpScreen;
+
+      if (!isLoggedIn && !isAuthRoute) {
+        return AppRoutes.loginScreen;
+      }
+
+      if (isLoggedIn && isAuthRoute) {
+        return AppRoutes.mainScreen;
+      }
+
+      return null;
+    },
+
     routes: [
       GoRoute(
         path: AppRoutes.splashScreen,
         name: AppRoutes.splashScreen,
-        builder: (context, state) {
-          return SplashScreen();
-        },
+        builder: (context, state) => const SplashScreen(),
       ),
       GoRoute(
         path: AppRoutes.loginScreen,
@@ -31,7 +66,7 @@ class RouterGeneratorConfig {
         builder: (context, state) {
           return BlocProvider(
             create: (context) => sl<AuthCubit>(),
-            child: LoginScreen(),
+            child: const LoginScreen(),
           );
         },
       ),
@@ -39,38 +74,39 @@ class RouterGeneratorConfig {
         path: AppRoutes.signUpScreen,
         name: AppRoutes.signUpScreen,
         builder: (context, state) {
-          return SignUpScreen();
+          return BlocProvider(
+            create: (context) => sl<AuthCubit>(),
+            child: const SignUpScreen(),
+          );
         },
       ),
       GoRoute(
         path: AppRoutes.addressScreen,
         name: AppRoutes.addressScreen,
-        builder: (context, state) {
-          return AddressScreen();
-        },
+        builder: (context, state) => const AddressScreen(),
       ),
 
-      // Shared CartCubit scope: Home (inside MainScreen), ProductDetails, Cart
+      // Shared CartCubit scope: Home (inside MainScreen), ProductDetails, Cart.
+      // CartCubit must be registered as a lazySingleton in the service
+      // locator for BlocProvider.value below to actually share state.
       ShellRoute(
         builder: (context, state, child) {
-          return BlocProvider(
-            create: (context) => sl<CartCubit>(),
-            child: child,
-          );
+          return BlocProvider.value(value: sl<CartCubit>(), child: child);
         },
         routes: [
           GoRoute(
             path: AppRoutes.mainScreen,
             name: AppRoutes.mainScreen,
-            builder: (context, state) {
-              return MainScreen();
-            },
+            builder: (context, state) => const MainScreen(),
           ),
           GoRoute(
             path: AppRoutes.productDetailsScreen,
             name: AppRoutes.productDetailsScreen,
             builder: (context, state) {
-              ProductsModel product = state.extra as ProductsModel;
+              final product = state.extra;
+              if (product is! ProductsModel) {
+                return const NotFoundScreen();
+              }
               return ProductDetailsScreen(product: product);
             },
           ),
@@ -83,4 +119,13 @@ class RouterGeneratorConfig {
       ),
     ],
   );
+}
+
+class NotFoundScreen extends StatelessWidget {
+  const NotFoundScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const Scaffold(body: Center(child: Text("Page not found")));
+  }
 }

@@ -184,6 +184,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     alignment: Alignment.center,
                     child: PrimaryButtonWidget(
                       buttonText: "Create Account",
+                      // جوه onPress بتاع PrimaryButtonWidget "Create Account"
                       onPress: () {
                         if (formKey.currentState!.validate()) {
                           debugPrint(
@@ -194,7 +195,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             "Password: ${passwordController.text.trim()}",
                           );
 
-                          GoRouter.of(context).pushNamed(AppRoutes.loginScreen);
+                          GoRouter.of(context).goNamed(AppRoutes.loginScreen);
                         }
                       },
                     ),
@@ -212,9 +213,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
                       WidthSpace(8),
 
+                      // جوه InkWell "Log In" في الآخر
                       InkWell(
                         onTap: () {
-                          GoRouter.of(context).pushNamed(AppRoutes.loginScreen);
+                          GoRouter.of(context).goNamed(AppRoutes.loginScreen);
                         },
                         child: Text("Log In", style: AppStyles.black16SemiBold),
                       ),

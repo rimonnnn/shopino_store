@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:ecommerce_app/core/utils/service_locator.dart';
 import 'package:ecommerce_app/core/utils/storage_helper.dart';
 import 'package:ecommerce_app/features/auth/cubit/auth_state.dart';
 import 'package:ecommerce_app/features/auth/model/login_response_model.dart';
@@ -32,5 +33,9 @@ class AuthCubit extends Cubit<AuthState> {
         emit(SuccessAuthState("Login Successfully"));
       },
     );
+  }
+
+  Future<void> logout() async {
+    await sl<StorageHelper>().clearTokens();
   }
 }

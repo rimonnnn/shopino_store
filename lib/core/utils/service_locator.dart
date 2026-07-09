@@ -21,6 +21,6 @@ void setupServicesLocator() {
   sl.registerFactory(() => ProductsCubit(sl<HomeRepo>()));
   sl.registerFactory(() => CategoriesCubit(sl<HomeRepo>()));
 
-  // Scoped by ShellRoute: instance lives only across Main/ProductDetails/Cart
-  sl.registerFactory<CartCubit>(() => CartCubit());
+  // Scoped by ShellRoute: same instance shared across Main/ProductDetails/Cart
+  sl.registerLazySingleton<CartCubit>(() => CartCubit());
 }
