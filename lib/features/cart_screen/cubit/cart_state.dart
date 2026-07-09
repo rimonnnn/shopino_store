@@ -12,6 +12,8 @@ abstract class CartState extends Equatable {
 
 class CartInitial extends CartState {}
 
+
+
 class CartLoaded extends CartState {
   final List<CartItemModel> items;
   final double subtotal;

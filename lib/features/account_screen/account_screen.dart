@@ -2,8 +2,11 @@ import 'package:ecommerce_app/core/routing/app_routes.dart';
 import 'package:ecommerce_app/core/styling/app_assets.dart';
 import 'package:ecommerce_app/core/styling/app_colors.dart';
 import 'package:ecommerce_app/core/styling/app_styles.dart';
+import 'package:ecommerce_app/core/widgets/custom_outline_button_widget.dart';
+import 'package:ecommerce_app/core/widgets/primary_button_widget.dart';
 import 'package:ecommerce_app/core/widgets/spacing_widgets.dart';
 import 'package:ecommerce_app/features/account_screen/widgets/account_details_widget.dart';
+import 'package:ecommerce_app/features/account_screen/widgets/logout_dialog_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
@@ -68,26 +71,41 @@ class AccountScreen extends StatelessWidget {
               HeightSpace(25),
               Divider(color: AppColors.secondaryColor, thickness: 5),
               HeightSpace(120),
-              Row(
-                children: [
-                  Icon(
-                    Icons.logout_outlined,
-                    size: 24,
-                    color: Colors.redAccent,
-                  ),
-                  WidthSpace(16),
-                  Text(
-                    "Logout",
-                    style: AppStyles.black16SemiBold.copyWith(
+              InkWell(
+                onTap: () {
+                  showLogOutDialog(context);
+                },
+                child: Row(
+                  children: [
+                    Icon(
+                      Icons.logout_outlined,
+                      size: 28,
                       color: Colors.redAccent,
                     ),
-                  ),
-                ],
+                    WidthSpace(4),
+                    Text(
+                      "Logout",
+                      style: AppStyles.black16SemiBold.copyWith(
+                        color: Colors.redAccent,
+                        fontSize: 22.sp,
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ],
           ),
         ),
       ),
+    );
+  }
+
+  void showLogOutDialog(context) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return LogoutDialogWidget();
+      },
     );
   }
 }
