@@ -62,24 +62,25 @@ The app consumes the [Platzi Fake Store API](https://api.escuelajs.co/api/v1) fo
 
 lib/
 ├── core/
-│ ├── constantes/
-│ ├── networking/ # Dio setup & API endpoints
-│ ├── routing/ # GoRouter configuration
-│ ├── styling/
-│ ├── utils/ # Service locator, storage helper
-│ └── widgets/ # Shared/reusable widgets
+│   ├── constantes/
+│   ├── networking/       # Dio setup & API endpoints
+│   ├── routing/          # GoRouter configuration
+│   ├── styling/
+│   ├── utils/            # Service locator, storage helper
+│   └── widgets/          # Shared/reusable widgets
 ├── features/
-│ ├── auth/ # Login & Sign Up
-│ ├── home_screen/ # Products & categories
-│ ├── prodect_details_screen/
-│ ├── cart_screen/
-│ ├── favorite_screen/
-│ ├── address_screen/
-│ ├── orders_screen/
-│ ├── account_screen/
-│ ├── main_screen/
-│ └── splash_screen/
+│   ├── auth/              # Login & Sign Up
+│   ├── home_screen/       # Products & categories
+│   ├── prodect_details_screen/
+│   ├── cart_screen/
+│   ├── favorite_screen/
+│   ├── address_screen/
+│   ├── orders_screen/
+│   ├── account_screen/
+│   ├── main_screen/
+│   └── splash_screen/
 └── main.dart
+
 
 ---
 
