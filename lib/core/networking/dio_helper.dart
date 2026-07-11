@@ -18,7 +18,11 @@ class DioHelper {
     dio!.interceptors.add(PrettyDioLogger());
   }
 
-  Future<Response<dynamic>> getRequest({required endPoint,  Map<String, dynamic>? query }) async {
+  Future<Response<dynamic>> getRequest({
+    // ignore: strict_top_level_inference
+    required endPoint,
+    Map<String, dynamic>? query,
+  }) async {
     try {
       Response response = await dio!.get(endPoint, queryParameters: query);
       return response;
@@ -28,7 +32,11 @@ class DioHelper {
     }
   }
 
-  Future<Response<dynamic>> postRequest({required endPoint, required Map<String, dynamic> data}) async {
+  Future<Response<dynamic>> postRequest({
+    // ignore: strict_top_level_inference
+    required endPoint,
+    required Map<String, dynamic> data,
+  }) async {
     try {
       Response response = await dio!.post(endPoint, data: data);
       return response;

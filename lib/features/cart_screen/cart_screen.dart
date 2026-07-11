@@ -108,7 +108,7 @@ class CartScreen extends StatelessWidget {
                   HeightSpace(50),
                   PrimaryButtonWidget(
                     onPress: () {
-                      // TODO: Checkout logic
+                      // TODO: Checkout logic  Soooooooooon !!!
                     },
                     buttonText: "Go To Checkout",
                   ),

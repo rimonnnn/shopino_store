@@ -2,7 +2,6 @@
 
 import 'package:ecommerce_app/features/favorite_screen/models/favorit_item_model.dart';
 import 'package:equatable/equatable.dart';
-import 'package:ecommerce_app/features/cart_screen/models/cart_item_model.dart';
 
 abstract class FavoriteState extends Equatable {
   const FavoriteState();
@@ -12,8 +11,6 @@ abstract class FavoriteState extends Equatable {
 }
 
 class FavoriteCartInitial extends FavoriteState {}
-
-
 
 class FavoriteCartLoaded extends FavoriteState {
   final List<FavoritItemModel> items;

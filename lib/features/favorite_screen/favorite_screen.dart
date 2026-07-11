@@ -1,5 +1,3 @@
-// lib/features/favorite_screen/favorite_screen.dart
-
 import 'package:ecommerce_app/core/styling/app_colors.dart';
 import 'package:ecommerce_app/core/styling/app_styles.dart';
 import 'package:ecommerce_app/core/utils/service_locator.dart';
@@ -38,7 +36,7 @@ class FavoriteScreen extends StatelessWidget {
             child: ListView.separated(
               padding: EdgeInsets.only(top: 20.sp, bottom: 20.sp),
               itemCount: state.items.length,
-              separatorBuilder: (_, __) => HeightSpace(14),
+              separatorBuilder: (_, _) => HeightSpace(14),
               itemBuilder: (context, index) {
                 final item = state.items[index];
                 return _FavoriteItemWidget(
@@ -77,7 +75,7 @@ class _FavoriteItemWidget extends StatelessWidget {
               width: 70.sp,
               height: 70.sp,
               fit: BoxFit.cover,
-              errorBuilder: (_, __, ___) => Container(
+              errorBuilder: (_, _, _) => Container(
                 width: 70.sp,
                 height: 70.sp,
                 color: AppColors.secondaryColor,

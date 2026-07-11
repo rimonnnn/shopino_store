@@ -4,7 +4,6 @@ import 'package:ecommerce_app/core/styling/app_colors.dart';
 import 'package:ecommerce_app/core/styling/app_styles.dart';
 import 'package:ecommerce_app/core/widgets/primary_text_field.dart';
 import 'package:ecommerce_app/core/widgets/spacing_widgets.dart';
-import 'package:ecommerce_app/features/auth/log_in/widgets/loading_widget.dart';
 import 'package:ecommerce_app/features/home_screen/cubit/categories_cubit.dart';
 import 'package:ecommerce_app/features/home_screen/cubit/categories_state.dart';
 import 'package:ecommerce_app/features/home_screen/cubit/products_cubit.dart';

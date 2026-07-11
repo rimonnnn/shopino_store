@@ -79,6 +79,7 @@ class AccountScreen extends StatelessWidget {
                     iconPath: AppAssets.orderIcon,
                     text: "Logout",
                     iconColor: Colors.redAccent,
+                    // ignore: deprecated_member_use
                     iconBackgroundColor: Colors.redAccent.withOpacity(0.08),
                     onTap: () => showLogOutDialog(context),
                   ),

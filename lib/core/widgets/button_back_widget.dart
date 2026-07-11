@@ -9,24 +9,21 @@ class ButtonBackWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Align(
-                alignment: Alignment.centerLeft,
-                child: Container(
-                  width: 41.w,
-                  height: 41.h,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(16.r),
-                    border: Border.all(color: Color(0xffE8ECF4)),
-                  ),
-                  child: InkWell(
-                    onTap: () {
-                      GoRouter.of(context).pop();
-                    },
-                    child: Icon(
-                      Icons.arrow_back_ios,
-                      color: AppColors.primaryColor,
-                    ),
-                  ),
-                ),
-              );
+      alignment: Alignment.centerLeft,
+      child: Container(
+        width: 41.w,
+        height: 41.h,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(16.r),
+          border: Border.all(color: Color(0xffE8ECF4)),
+        ),
+        child: InkWell(
+          onTap: () {
+            GoRouter.of(context).pop();
+          },
+          child: Icon(Icons.arrow_back_ios, color: AppColors.primaryColor),
+        ),
+      ),
+    );
   }
 }

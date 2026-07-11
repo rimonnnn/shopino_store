@@ -1,5 +1,3 @@
-// lib/features/favorite_screen/cubit/favorite_cubit.dart
-
 import 'package:ecommerce_app/features/favorite_screen/cubit/favorite_state.dart';
 import 'package:ecommerce_app/features/favorite_screen/favorite_local_data_source.dart';
 import 'package:ecommerce_app/features/favorite_screen/models/favorit_item_model.dart';

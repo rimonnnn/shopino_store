@@ -1,7 +1,6 @@
 import 'package:ecommerce_app/core/styling/app_colors.dart';
 import 'package:ecommerce_app/core/styling/app_fonts.dart';
 import 'package:ecommerce_app/core/styling/app_styles.dart';
-
 import 'package:flutter/material.dart';
 
 class AppTheme {
@@ -15,8 +14,6 @@ class AppTheme {
       titleLarge: AppStyles.primaryHeadLineSyle,
       titleMedium: AppStyles.suptitleStyle,
     ),
-    buttonTheme: ButtonThemeData(
-      buttonColor: AppColors.primaryColor
-    )
+    buttonTheme: ButtonThemeData(buttonColor: AppColors.primaryColor),
   );
 }

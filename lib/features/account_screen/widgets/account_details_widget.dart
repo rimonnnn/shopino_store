@@ -53,9 +53,7 @@ class AccountDetailsWidget extends StatelessWidget {
               ),
             ),
             WidthSpace(14),
-            Expanded(
-              child: Text(text ?? "", style: AppStyles.black16SemiBold),
-            ),
+            Expanded(child: Text(text ?? "", style: AppStyles.black16SemiBold)),
             Icon(
               Icons.arrow_forward_ios_rounded,
               size: 16.sp,

@@ -17,11 +17,11 @@ class ProductsCubit extends Cubit<ProductsState> {
   }
 
   void fetchProductCategory(int categoryId) async {
-  emit(ProductsLoadingState());
-  final res = await _homeRepo.getProductCategory(categoryId);
-  res.fold(
-    (error) => emit(ProductsErrorState(error)),
-    (right) => emit(ProductsLoadedState(products: right)),
-  );
-}
+    emit(ProductsLoadingState());
+    final res = await _homeRepo.getProductCategory(categoryId);
+    res.fold(
+      (error) => emit(ProductsErrorState(error)),
+      (right) => emit(ProductsLoadedState(products: right)),
+    );
+  }
 }

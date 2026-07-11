@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class SectionCard extends StatelessWidget {
-  const SectionCard({required this.children});
+  const SectionCard({super.key, required this.children});
 
   final List<Widget> children;
 
@@ -16,6 +15,7 @@ class SectionCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(18.r),
         boxShadow: [
           BoxShadow(
+            // ignore: deprecated_member_use
             color: Colors.black.withOpacity(0.04),
             blurRadius: 12,
             offset: const Offset(0, 4),

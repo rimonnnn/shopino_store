@@ -12,10 +12,9 @@ import 'package:ecommerce_app/features/main_screen/main_screen.dart';
 import 'package:ecommerce_app/features/orders_screen/orders_screen.dart';
 import 'package:ecommerce_app/features/prodect_details_screen/product_details_screen.dart';
 import 'package:ecommerce_app/features/splash_screen/splash_screen.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-
-import 'package:flutter/material.dart';
 
 class RouterGeneratorConfig {
   static final GlobalKey<NavigatorState> rootNavigatorKey =
