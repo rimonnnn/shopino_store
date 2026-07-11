@@ -18,86 +18,81 @@ class AccountScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: const Color(0xffF7F7F9),
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: const Color(0xffF7F7F9),
+        elevation: 0,
         title: Text("Account", style: AppStyles.black32SemiBold),
         centerTitle: true,
         leading: Container(),
       ),
       body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 24.sp),
+        padding: EdgeInsets.symmetric(horizontal: 20.sp),
         child: SingleChildScrollView(
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              HeightSpace(24),
-              Divider(color: AppColors.secondaryColor, thickness: 1),
+              HeightSpace(8),
+              _SectionCard(
+                children: [
+                  AccountDetailsWidget(
+                    iconPath: AppAssets.orderIcon,
+                    text: "My Orders",
+                  ),
+                  _divider(),
+                  AccountDetailsWidget(
+                    iconPath: AppAssets.addressIcon,
+                    text: "Address Book",
+                    onTap: () {
+                      GoRouter.of(context).pushNamed(AppRoutes.addressScreen);
+                    },
+                  ),
+                ],
+              ),
               HeightSpace(20),
-              AccountDetailsWidget(
-                iconPath: AppAssets.orderIcon,
-                text: "My Orders",
+              _SectionCard(
+                children: [
+                  AccountDetailsWidget(
+                    iconPath: AppAssets.detailsIcon,
+                    text: "My Details",
+                  ),
+                  _divider(),
+                  AccountDetailsWidget(
+                    iconPath: AppAssets.faqsIcon,
+                    text: "FAQs",
+                  ),
+                  _divider(),
+                  AccountDetailsWidget(
+                    iconPath: AppAssets.helpCenterIcon,
+                    text: "Help Center",
+                  ),
+                ],
               ),
-              HeightSpace(25),
-              Divider(color: Color(0xffAAAAAA), thickness: 4),
-              HeightSpace(25),
-              AccountDetailsWidget(
-                iconPath: AppAssets.addressIcon,
-                text: "Address Book",
-                onTap: () {
-                  GoRouter.of(context).pushNamed(AppRoutes.addressScreen);
-                },
+              HeightSpace(20),
+              _SectionCard(
+                children: [
+                  AccountDetailsWidget(
+                    iconPath: AppAssets.orderIcon,
+                    text: "Logout",
+                    iconColor: Colors.redAccent,
+                    iconBackgroundColor: Colors.redAccent.withOpacity(0.08),
+                    onTap: () => showLogOutDialog(context),
+                  ),
+                ],
               ),
-
-              HeightSpace(25),
-              Divider(color: AppColors.secondaryColor, thickness: 1),
-              HeightSpace(25),
-              AccountDetailsWidget(iconPath: AppAssets.faqsIcon, text: "FAQs"),
-
-              HeightSpace(25),
-              Divider(color: AppColors.secondaryColor, thickness: 1),
-              HeightSpace(25),
-              AccountDetailsWidget(
-                iconPath: AppAssets.detailsIcon,
-                text: "My Details",
-              ),
-
-              HeightSpace(25),
-              Divider(color: AppColors.secondaryColor, thickness: 1),
-              HeightSpace(25),
-              AccountDetailsWidget(
-                iconPath: AppAssets.helpCenterIcon,
-                text: "Help Center",
-              ),
-
-              HeightSpace(25),
-              Divider(color: AppColors.secondaryColor, thickness: 5),
-              HeightSpace(120),
-              InkWell(
-                onTap: () {
-                  showLogOutDialog(context);
-                },
-                child: Row(
-                  children: [
-                    Icon(
-                      Icons.logout_outlined,
-                      size: 28,
-                      color: Colors.redAccent,
-                    ),
-                    WidthSpace(4),
-                    Text(
-                      "Logout",
-                      style: AppStyles.black16SemiBold.copyWith(
-                        color: Colors.redAccent,
-                        fontSize: 22.sp,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
+              HeightSpace(40),
             ],
           ),
         ),
       ),
+    );
+  }
+
+  Widget _divider() {
+    return Divider(
+      color: AppColors.secondaryColor.withOpacity(0.4),
+      thickness: 1,
+      height: 1,
     );
   }
 
@@ -109,32 +104,38 @@ class AccountScreen extends StatelessWidget {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadiusGeometry.circular(24.sp),
           ),
-          child: SizedBox(
-            width: MediaQuery.of(context).size.width * 0.7,
-            height: MediaQuery.of(context).size.height * 0.4,
+          child: Padding(
+            padding: EdgeInsets.symmetric(vertical: 32.h, horizontal: 20.w),
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
               children: [
-                HeightSpace(40),
-                Icon(
-                  Icons.warning_amber_outlined,
-                  color: Colors.redAccent,
-                  size: 50.sp,
+                Container(
+                  padding: EdgeInsets.all(14.sp),
+                  decoration: BoxDecoration(
+                    color: Colors.redAccent.withOpacity(0.08),
+                    shape: BoxShape.circle,
+                  ),
+                  child: Icon(
+                    Icons.warning_amber_outlined,
+                    color: Colors.redAccent,
+                    size: 40.sp,
+                  ),
                 ),
                 HeightSpace(20),
                 Text(
                   "Logout?",
-                  style: AppStyles.black16SemiBold.copyWith(fontSize: 24.sp),
+                  style: AppStyles.black16SemiBold.copyWith(fontSize: 22.sp),
                 ),
                 HeightSpace(10),
                 Text(
                   "Are you sure you want to logout?",
+                  textAlign: TextAlign.center,
                   style: AppStyles.grey16W400,
                 ),
-                HeightSpace(32),
+                HeightSpace(28),
                 PrimaryButtonWidget(
                   borderRadius: 12,
-                  width: 280.w,
+                  width: double.infinity,
                   height: 54.h,
                   buttonText: "Yes, Logout",
                   buttonColor: Colors.redAccent,
@@ -145,7 +146,7 @@ class AccountScreen extends StatelessWidget {
                 ),
                 HeightSpace(12),
                 CustomOutlineButtonWidget(
-                  width: 280.w,
+                  width: double.infinity,
                   height: 54.h,
                   buttonText: "No, Cancel",
                   borderColor: Colors.grey,
@@ -157,6 +158,31 @@ class AccountScreen extends StatelessWidget {
           ),
         );
       },
+    );
+  }
+}
+
+class _SectionCard extends StatelessWidget {
+  const _SectionCard({required this.children});
+
+  final List<Widget> children;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.symmetric(horizontal: 14.w, vertical: 4.h),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(18.r),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.04),
+            blurRadius: 12,
+            offset: const Offset(0, 4),
+          ),
+        ],
+      ),
+      child: Column(children: children),
     );
   }
 }

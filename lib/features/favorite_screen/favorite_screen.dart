@@ -22,7 +22,7 @@ class FavoriteScreen extends StatelessWidget {
         leading: Container(),
         backgroundColor: Colors.white,
         centerTitle: true,
-        title: Text("My Favorites", style: AppStyles.black32SemiBold),
+        title: Text("Favorites", style: AppStyles.black32SemiBold),
       ),
       body: BlocBuilder<FavoriteCubit, FavoriteState>(
         bloc: sl<FavoriteCubit>(),

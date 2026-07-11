@@ -20,7 +20,7 @@ class CartScreen extends StatelessWidget {
         leading: Container(),
         backgroundColor: Colors.white,
         centerTitle: true,
-        title: Text("My Cart", style: AppStyles.black32SemiBold),
+        title: Text("Cart", style: AppStyles.black32SemiBold),
       ),
       body: BlocBuilder<CartCubit, CartState>(
         builder: (context, state) {
