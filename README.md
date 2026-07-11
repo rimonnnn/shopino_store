@@ -87,7 +87,7 @@ Shopino demonstrates scalable project architecture, maintainable code, a respons
 
 ## 🎥 Demo
 
-> 🚧 APK and demo video coming soon.
+[(https://github.com/rimonnnn/shopino_store/releases/tag/v1.0.0)]
 
 ---
 
@@ -241,7 +241,6 @@ https://api.escuelajs.co/api/v1
 - [x] Local persistence
 - [x] Clean architecture
 - [x] Cubit state management
-- [x] Search 
 - [ ] Payment integration
 - [ ] Product reviews
 - [ ] Unit testing
