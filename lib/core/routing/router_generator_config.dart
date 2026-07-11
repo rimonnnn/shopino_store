@@ -9,6 +9,7 @@ import 'package:ecommerce_app/features/cart_screen/cart_screen.dart';
 import 'package:ecommerce_app/features/cart_screen/cubit/cart_cubit.dart';
 import 'package:ecommerce_app/features/home_screen/models/product_model.dart';
 import 'package:ecommerce_app/features/main_screen/main_screen.dart';
+import 'package:ecommerce_app/features/orders_screen/orders_screen.dart';
 import 'package:ecommerce_app/features/prodect_details_screen/product_details_screen.dart';
 import 'package:ecommerce_app/features/splash_screen/splash_screen.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -25,7 +26,6 @@ class RouterGeneratorConfig {
     initialLocation: AppRoutes.splashScreen,
     errorBuilder: (context, state) => const NotFoundScreen(),
 
-  
     redirect: (context, state) async {
       // Let splash screen handle its own startup logic without interference.
       if (state.matchedLocation == AppRoutes.splashScreen) return null;
@@ -82,10 +82,12 @@ class RouterGeneratorConfig {
         name: AppRoutes.addressScreen,
         builder: (context, state) => const AddressScreen(),
       ),
+      GoRoute(
+        path: AppRoutes.ordersScreen,
+        name: AppRoutes.ordersScreen,
+        builder: (context, state) => const OrdersScreen(),
+      ),
 
-      // Shared CartCubit scope: Home (inside MainScreen), ProductDetails, Cart.
-      // CartCubit must be registered as a lazySingleton in the service
-      // locator for BlocProvider.value below to actually share state.
       ShellRoute(
         builder: (context, state, child) {
           return BlocProvider.value(value: sl<CartCubit>(), child: child);

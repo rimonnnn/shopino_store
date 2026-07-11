@@ -6,6 +6,7 @@ import 'package:ecommerce_app/core/widgets/custom_outline_button_widget.dart';
 import 'package:ecommerce_app/core/widgets/primary_button_widget.dart';
 import 'package:ecommerce_app/core/widgets/spacing_widgets.dart';
 import 'package:ecommerce_app/features/account_screen/widgets/account_details_widget.dart';
+import 'package:ecommerce_app/features/account_screen/widgets/section_cart.dart';
 import 'package:ecommerce_app/features/auth/cubit/auth_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -33,11 +34,14 @@ class AccountScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               HeightSpace(8),
-              _SectionCard(
+              SectionCard(
                 children: [
                   AccountDetailsWidget(
                     iconPath: AppAssets.orderIcon,
                     text: "My Orders",
+                    onTap: () {
+                      GoRouter.of(context).pushNamed(AppRoutes.ordersScreen);
+                    },
                   ),
                   _divider(),
                   AccountDetailsWidget(
@@ -50,7 +54,7 @@ class AccountScreen extends StatelessWidget {
                 ],
               ),
               HeightSpace(20),
-              _SectionCard(
+              SectionCard(
                 children: [
                   AccountDetailsWidget(
                     iconPath: AppAssets.detailsIcon,
@@ -69,7 +73,7 @@ class AccountScreen extends StatelessWidget {
                 ],
               ),
               HeightSpace(20),
-              _SectionCard(
+              SectionCard(
                 children: [
                   AccountDetailsWidget(
                     iconPath: AppAssets.orderIcon,
@@ -158,31 +162,6 @@ class AccountScreen extends StatelessWidget {
           ),
         );
       },
-    );
-  }
-}
-
-class _SectionCard extends StatelessWidget {
-  const _SectionCard({required this.children});
-
-  final List<Widget> children;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.symmetric(horizontal: 14.w, vertical: 4.h),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(18.r),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.04),
-            blurRadius: 12,
-            offset: const Offset(0, 4),
-          ),
-        ],
-      ),
-      child: Column(children: children),
     );
   }
 }
