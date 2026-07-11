@@ -6,9 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 void main() async {
-  setupServicesLocator();
   WidgetsFlutterBinding.ensureInitialized();
-  await sl<FavoriteCubit>().loadFavorites();
+  setupServicesLocator();
   await sl<FavoriteCubit>().loadFavorites();
   await sl<CartCubit>().loadCart();
   runApp(const MyApp());
