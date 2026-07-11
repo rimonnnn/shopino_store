@@ -1,12 +1,13 @@
 import 'package:ecommerce_app/core/routing/router_generator_config.dart';
 import 'package:ecommerce_app/core/utils/service_locator.dart';
+import 'package:ecommerce_app/features/favorite_screen/cubit/favorite_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 void main() async {
   setupServicesLocator();
   WidgetsFlutterBinding.ensureInitialized();
-
+  await sl<FavoriteCubit>().loadFavorites();
   runApp(const MyApp());
 }
 

@@ -3,6 +3,8 @@ import 'package:ecommerce_app/core/utils/storage_helper.dart';
 import 'package:ecommerce_app/features/auth/cubit/auth_cubit.dart';
 import 'package:ecommerce_app/features/auth/repo/auth_repo.dart';
 import 'package:ecommerce_app/features/cart_screen/cubit/cart_cubit.dart';
+import 'package:ecommerce_app/features/favorite_screen/cubit/favorite_cubit.dart';
+import 'package:ecommerce_app/features/favorite_screen/favorite_local_data_source.dart';
 import 'package:ecommerce_app/features/home_screen/cubit/categories_cubit.dart';
 import 'package:ecommerce_app/features/home_screen/cubit/products_cubit.dart';
 import 'package:ecommerce_app/features/home_screen/repo/home_repo.dart';
@@ -23,4 +25,12 @@ void setupServicesLocator() {
 
   // Scoped by ShellRoute: same instance shared across Main/ProductDetails/Cart
   sl.registerLazySingleton<CartCubit>(() => CartCubit());
+  sl.registerLazySingleton<FavoriteLocalDataSource>(
+    () => FavoriteLocalDataSource(),
+  );
+
+  // Scoped globally: نفس الـ instance في كل التطبيق عشان الـ favorites تفضل متزامنة
+  sl.registerLazySingleton<FavoriteCubit>(
+    () => FavoriteCubit(sl<FavoriteLocalDataSource>()),
+  );
 }

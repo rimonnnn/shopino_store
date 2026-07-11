@@ -25,10 +25,7 @@ class RouterGeneratorConfig {
     initialLocation: AppRoutes.splashScreen,
     errorBuilder: (context, state) => const NotFoundScreen(),
 
-    // Centralized session check. This replaces the token check that used to
-    // live inside LoginScreen.initState (two separate async calls that could
-    // both fire pushReplacementNamed(mainScreen) at once — the root cause of
-    // the earlier "Duplicate GlobalKey" crash).
+  
     redirect: (context, state) async {
       // Let splash screen handle its own startup logic without interference.
       if (state.matchedLocation == AppRoutes.splashScreen) return null;

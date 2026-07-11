@@ -4,6 +4,7 @@ import 'package:ecommerce_app/core/utils/service_locator.dart';
 import 'package:ecommerce_app/features/account_screen/account_screen.dart';
 import 'package:ecommerce_app/features/auth/cubit/auth_cubit.dart';
 import 'package:ecommerce_app/features/cart_screen/cart_screen.dart';
+import 'package:ecommerce_app/features/favorite_screen/favorite_screen.dart';
 import 'package:ecommerce_app/features/home_screen/cubit/categories_cubit.dart';
 import 'package:ecommerce_app/features/home_screen/cubit/products_cubit.dart';
 import 'package:ecommerce_app/features/home_screen/home_screen.dart';
@@ -30,6 +31,7 @@ class _MainScreenState extends State<MainScreen> {
       child: HomeScreen(),
     ),
     CartScreen(),
+    FavoriteScreen(),
     BlocProvider(create: (context) => sl<AuthCubit>(), child: AccountScreen()),
   ];
   @override
@@ -80,10 +82,18 @@ class _MainScreenState extends State<MainScreen> {
           ),
           BottomNavigationBarItem(
             backgroundColor: Colors.white,
+            icon: Icon(
+              currentIndex == 2 ? Icons.favorite : Icons.favorite_border,
+              color: currentIndex == 2 ? Colors.red : Colors.grey,
+            ),
+            label: "Favorite",
+          ),
+          BottomNavigationBarItem(
+            backgroundColor: Colors.white,
             icon: SvgPicture.asset(
               AppAssets.accountIcon,
               colorFilter: ColorFilter.mode(
-                currentIndex == 2 ? AppColors.primaryColor : Colors.grey,
+                currentIndex == 3 ? AppColors.primaryColor : Colors.grey,
                 BlendMode.srcIn,
               ),
             ),
