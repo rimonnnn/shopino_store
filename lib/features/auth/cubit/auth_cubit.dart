@@ -4,6 +4,8 @@ import 'package:ecommerce_app/core/utils/storage_helper.dart';
 import 'package:ecommerce_app/features/auth/cubit/auth_state.dart';
 import 'package:ecommerce_app/features/auth/model/login_response_model.dart';
 import 'package:ecommerce_app/features/auth/repo/auth_repo.dart';
+import 'package:ecommerce_app/features/cart_screen/cubit/cart_cubit.dart';
+import 'package:ecommerce_app/features/favorite_screen/cubit/favorite_cubit.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class AuthCubit extends Cubit<AuthState> {
@@ -37,5 +39,7 @@ class AuthCubit extends Cubit<AuthState> {
 
   Future<void> logout() async {
     await sl<StorageHelper>().clearTokens();
+    await sl<FavoriteCubit>().clearFavorites();
+    await sl<CartCubit>().clearCart();
   }
 }
