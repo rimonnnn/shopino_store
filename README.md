@@ -241,8 +241,8 @@ https://api.escuelajs.co/api/v1
 - [x] Local persistence
 - [x] Clean architecture
 - [x] Cubit state management
+- [x] Search 
 - [ ] Payment integration
-- [ ] Search
 - [ ] Product reviews
 - [ ] Unit testing
 - [ ] Widget testing
