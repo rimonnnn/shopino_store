@@ -87,6 +87,10 @@ Shopino demonstrates scalable project architecture, maintainable code, a respons
 
 ## 🎥 Demo
 
+[(https://drive.google.com/file/d/1hLKaIuwPIpzSWSK5bf1QOYVSc8mJMEfF/view?usp=sharing)]
+
+## 📱 APK
+
 [(https://github.com/rimonnnn/shopino_store/releases/tag/v1.0.0)]
 
 ---
